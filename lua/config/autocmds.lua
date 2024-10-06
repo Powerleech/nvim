@@ -1,3 +1,28 @@
+--
+
+if os.getenv("TMUX") then
+  vim.api.nvim_create_augroup("tmux_something", { clear = true })
+
+  -- Hide TMUX status line when resuming or entering Neovim
+  vim.api.nvim_create_autocmd({ "VimResume", "VimEnter" }, {
+    group = "tmux_something",
+    pattern = "*",
+    callback = function()
+      os.execute("tmux set status off")
+    end,
+  })
+
+  -- Show TMUX status line when leaving or suspending Neovim
+  vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+    group = "tmux_something",
+    pattern = "*",
+    callback = function()
+      os.execute("tmux set status on")
+    end,
+  })
+end
+
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost",
   { callback = function() vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 100 }) end })
