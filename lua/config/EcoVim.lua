@@ -26,10 +26,10 @@ EcoVim = {
         enabled = false,
       },
       copilot = {
-        enabled = true,
+        enabled = false,
       },
       tabnine = {
-        enabled = false,
+        enabled = true,
       },
     },
     completion = {
