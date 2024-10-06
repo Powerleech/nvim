@@ -30,16 +30,19 @@ local buffer_option = {
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Tabnine Setup                                            │
 -- ╰──────────────────────────────────────────────────────────╯
-if EcoVim.plugins.ai.tabnine.enabled then
-	tabnine:setup({
-		max_lines = 1000,
-		max_num_results = 3,
-		sort = true,
-		show_prediction_strength = true,
-		run_on_every_keystroke = true,
-		snipper_placeholder = "..",
-		ignored_file_types = {},
-	})
+local status_ok, tabnine = pcall(require, "cmp_tabnine.config")
+if status_ok and EcoVim.plugins.ai.tabnine.enabled then
+    tabnine:setup({
+        max_lines = 1000,
+        max_num_results = 3,
+        sort = true,
+        show_prediction_strength = true,
+        run_on_every_keystroke = true,
+        snipper_placeholder = "..",
+        ignored_file_types = {},
+    })
+else
+    print("cmp-tabnine failed to load.")
 end
 
 return {
