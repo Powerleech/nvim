@@ -85,7 +85,7 @@ require("mason-lspconfig").setup_handlers {
     })
   end,
 
-  ["tsserver"] = function()
+  ["ts_ls"] = function()
     -- Skip since we use vtsls
   end,
 
