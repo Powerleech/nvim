@@ -41,8 +41,6 @@ if status_ok and EcoVim.plugins.ai.tabnine.enabled then
         snipper_placeholder = "..",
         ignored_file_types = {},
     })
-else
-    print("cmp-tabnine failed to load.")
 end
 
 return {
