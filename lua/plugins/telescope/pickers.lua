@@ -64,9 +64,9 @@ M.edit_neovim = function()
 end
 
 M.project_files = function(opts)
-  opts = opts or {} -- define here if you want to define something
-  local ok = pcall(require "telescope.builtin".git_files, opts)
-  if not ok then require "telescope.builtin".find_files(opts) end
+  opts = opts or {no_ignore=true} -- define here if you want to define something
+  -- local ok = pcall(require "telescope.builtin".git_files, opts)
+  require "telescope.builtin".find_files(opts)
 end
 
 M.command_history = function()
