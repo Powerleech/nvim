@@ -60,6 +60,9 @@ return function(opts)
         table.insert(args, prompt_split[1])
       end
 
+      table.insert(args, "--glob")
+      table.insert(args, "!vendor/**")
+
       if prompt_split[2] and is_table(opts.shortcuts[prompt_split[2]]) then
         local pattern
 
