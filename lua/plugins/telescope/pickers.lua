@@ -43,7 +43,7 @@ end
 -- Custom pickers
 
 M.edit_neovim = function()
-  builtin.git_files(
+  builtin.find_files(
     require('telescope.themes').get_dropdown({
       color_devicons   = true,
       cwd              = "~/.config/nvim",
@@ -64,9 +64,9 @@ M.edit_neovim = function()
 end
 
 M.project_files = function(opts)
-  opts = opts or {} -- define here if you want to define something
-  local ok = pcall(require "telescope.builtin".git_files, opts)
-  if not ok then require "telescope.builtin".find_files(opts) end
+  opts = opts or {no_ignore=true} -- define here if you want to define something
+  -- local ok = pcall(require "telescope.builtin".git_files, opts)
+  require "telescope.builtin".find_files(opts)
 end
 
 M.command_history = function()
@@ -88,6 +88,8 @@ end
 M.buffer_search = function()
   builtin.buffers(
     require('telescope.themes').get_dropdown({
+      sort_mru       = true,
+      sort_lastused  = true,
       previewer      = false,
       color_devicons = true,
       winblend       = 4,

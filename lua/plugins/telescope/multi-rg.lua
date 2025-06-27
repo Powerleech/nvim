@@ -60,6 +60,9 @@ return function(opts)
         table.insert(args, prompt_split[1])
       end
 
+      table.insert(args, "--glob")
+      table.insert(args, "!vendor/**")
+
       if prompt_split[2] and is_table(opts.shortcuts[prompt_split[2]]) then
         local pattern
 
@@ -90,7 +93,7 @@ return function(opts)
 
       return flatten {
         args,
-        { "-F" , "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+        { "-F" , "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--no-ignore" },
       }
     end,
     entry_maker = make_entry.gen_from_vimgrep(opts),

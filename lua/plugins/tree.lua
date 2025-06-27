@@ -148,6 +148,9 @@ return {
             },
           },
         },
+        git = {
+          enable = false
+        },
         view = {
           -- width of the window, can be either a number (columns) or a string in `%`
           width = 40,

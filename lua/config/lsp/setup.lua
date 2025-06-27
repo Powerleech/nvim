@@ -27,7 +27,9 @@ mason_lsp.setup({
     "lua_ls",
     "prismals",
     "tailwindcss",
-    "ts_ls"
+    "ts_ls",
+    "solargraph",
+    "intelephense"
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -78,9 +80,13 @@ require("mason-lspconfig").setup_handlers {
     lspconfig.vtsls.setup({
       capabilities = capabilities,
       handlers = require("config.lsp.servers.tsserver").handlers,
-      on_attach =require("config.lsp.servers.tsserver").on_attach,
+      on_attach = require("config.lsp.servers.tsserver").on_attach,
       settings = require("config.lsp.servers.tsserver").settings,
     })
+  end,
+
+  ["ts_ls"] = function()
+    -- Skip since we use vtsls
   end,
 
   ["tailwindcss"] = function()
@@ -102,6 +108,29 @@ require("mason-lspconfig").setup_handlers {
       settings = require("config.lsp.servers.cssls").settings,
     })
   end,
+
+  ["solargraph"] = function()
+    lspconfig.solargraph.setup({
+      capabilities = capabilities,
+      handlers = handlers,
+      on_attach = on_attach,
+      init_options = { formatting = true },
+      settings = {
+        solargraph = {
+          diagnostics = true
+        }
+      }
+    })
+  end,
+
+  ["intelephense"] = function()
+    lspconfig.intelephense.setup({
+      capabilities = capabilities,
+      handlers = handlers,
+      on_attach = on_attach,
+    })
+  end,
+
 
   ["eslint"] = function()
     lspconfig.eslint.setup({
@@ -129,16 +158,6 @@ require("mason-lspconfig").setup_handlers {
       settings = require("config.lsp.servers.lua_ls").settings,
     })
   end,
-
-  ["vuels"] = function()
-    lspconfig.vuels.setup({
-      filetypes = require("config.lsp.servers.vuels").filetypes,
-      handlers = handlers,
-      init_options = require("config.lsp.servers.vuels").init_options,
-      on_attach = require("config.lsp.servers.vuels").on_attach,
-      settings = require("config.lsp.servers.vuels").settings,
-    })
-  end
 }
 
 require("ufo").setup({

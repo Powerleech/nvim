@@ -1,4 +1,3 @@
--- hid tmux status bar on entering
 if os.getenv("TMUX") then
   vim.api.nvim_create_augroup("tmux_something", { clear = true })
 
